@@ -36,16 +36,18 @@ fun generateList(n: Int): ListNode {
 }
 
 fun main() {
-    val result = Solution().removeNthFromEnd(generateList(2), 1)
-
-    println("Output: " + formatLinkedList(result))
+    for (input in listOf(1 to 1, 2 to 1, 5 to 2)) {
+        var result = Solution().removeNthFromEnd(generateList(input.first), input.second)
+        val expected = (1..input.first).filter { it != input.first - input.second + 1 }
+        println("(${input.first}, ${input.second}) -> Expected: $expected. Output: " + formatLinkedList(result))
+    }
 }
 
 private fun formatLinkedList(list: ListNode?): String {
     val sb = StringBuilder("[")
     var current = list
     while (current != null) {
-        sb.append("${current.`val`}")
+        sb.append("${current.`val`}, ")
         current = current.next
     }
     sb.append("]")
@@ -67,24 +69,28 @@ class Solution {
         var reachedEnough = 0
         var wireFrom: ListNode? = null
         var wireTo: ListNode? = null
-        var nStepsBack = current!!
+        var nStepsBack: ListNode? = null
 
         do {
+            reachedEnough++
             println("Reached: $reachedEnough; wireFrom: $wireFrom; wireTo: $wireTo; nSteps: $nStepsBack")
+
             if (reachedEnough == n) {
-                wireFrom = nStepsBack
-                wireTo = nStepsBack.next!!.next ?: return null
-                nStepsBack = nStepsBack.next!!
+                nStepsBack = head
+                wireFrom == null
+                wireTo = nStepsBack?.next
             }
-            else reachedEnough++
+            if (reachedEnough > n) {
+                wireFrom = nStepsBack
+                nStepsBack = nStepsBack!!.next
+                wireTo = nStepsBack!!.next
+            }
             current = current!!.next
+
         } while (current != null)
 
-        if (reachedEnough != n)
-            return null
-
-        if (wireFrom == null && wireTo == null)
-            return null
+        if (wireFrom == null) return head.next
+        //if (wireTo == null) ...
 
         wireFrom?.next = wireTo
         return head
