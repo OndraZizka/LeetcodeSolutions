@@ -35,23 +35,37 @@ fun generateList(n: Int): ListNode {
     return head
 }
 
+fun createLinkedListFrom(list: List<Int>): ListNode? {
+    var prev: ListNode? = null
+    var head: ListNode? = null
+    for (item in list) {
+        val node = ListNode(item)
+        if (head == null) head = node
+        prev?.next = node
+        prev = node
+    }
+    return head
+}
+
+fun ListNode?.format(): String {
+    val sb = StringBuilder("[")
+    var current = this
+    while (current != null) {
+        sb.append("${current.`val`}")
+        current = current.next
+        if (current != null) sb.append(", ")
+    }
+    sb.append("]")
+    return sb.toString()
+}
+
+
 fun main() {
     for (input in listOf(1 to 1, 2 to 1, 5 to 2)) {
         var result = Solution().removeNthFromEnd(generateList(input.first), input.second)
         val expected = (1..input.first).filter { it != input.first - input.second + 1 }
-        println("(${input.first}, ${input.second}) -> Expected: $expected. Output: " + formatLinkedList(result))
+        println("(${input.first}, ${input.second}) -> Expected: $expected. Output: " + result.format())
     }
-}
-
-private fun formatLinkedList(list: ListNode?): String {
-    val sb = StringBuilder("[")
-    var current = list
-    while (current != null) {
-        sb.append("${current.`val`}, ")
-        current = current.next
-    }
-    sb.append("]")
-    return sb.toString()
 }
 
 class ListNode(var `val`: Int) {
