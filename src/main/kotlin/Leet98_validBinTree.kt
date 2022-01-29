@@ -2,36 +2,27 @@ import java.util.*
 
 class Leet98_validBinTree {
 
-    var stackR = Stack<Int>()
-    var stackL = Stack<Int>()
+    var items = mutableListOf<Int>()
 
     fun isValidBST(root: TreeNode?): Boolean {
-        stackR = Stack<Int>()
-        return isValidBST_(root)
+        inOrderTraversal(root)
+
+        var prev = items.first()
+        for (i in items.slice(1..(items.size - 1))) {
+            if (i <= prev)
+                return false
+            prev = i
+        }
+        return true
     }
 
-    fun isValidBST_(root: TreeNode?): Boolean {
-        if (root == null)
-            return true
+    fun inOrderTraversal(root: TreeNode?) {
+        if (root == null) return
 
-        if (stackR.firstOrNull { it <= root.`val` } != null) {
-            println("Invalid node: $root; stackR: ${stackR.joinToString()}")
-            return false
-        }
-        if (stackL.firstOrNull { it >= root.`val` } != null) {
-            println("Invalid node: $root; stackL: ${stackL.joinToString()}")
-            return false
-        }
-
-        stackR.push(root.`val`)
-        if (!isValidBST_(root.left)) return false
-        stackR.pop()
-
-        stackL.push(root.`val`)
-        if (!isValidBST_(root.right)) return false
-        stackL.pop()
-
-        return true
+        inOrderTraversal(root.left)
+        items.add(root.`val`)
+        print("${root.`val`}, ")
+        inOrderTraversal(root.right)
     }
 
 }
@@ -53,7 +44,7 @@ fun main() {
         )
     )
 
-    println("" + Leet98_validBinTree().isValidBST(tree))
+    println("Result: " + Leet98_validBinTree().isValidBST(tree))
 }
 
 class TreeNode(var `val`: Int) {
