@@ -21,7 +21,9 @@ class Leet4 {
         var posB = 0
 
         while (true) {
-            if (posA + posB == lastIndex)  break
+            /*if (posA + posB == lastIndex) {
+                return
+            }*/
 
             // Take the lesser on each cycle.
             val take: Int
@@ -29,8 +31,9 @@ class Leet4 {
             xprintln("MedPos $medianPos, posA $posA of ${nums1.size}, posB $posB of ${nums2.size}; MedVal $medVal")
 
             val afterLastA = posA == nums1.size
+            val afterLastB = posB == nums2.size
 
-            if (!afterLastA && nums1[posA] <= nums2[posB]) {
+            if (!afterLastA && (afterLastB || nums1[posA] <= nums2[posB])) {
                 take = nums1[posA];
                 xprintln("Taking $take from A at $posA")
                 posA++
@@ -41,13 +44,14 @@ class Leet4 {
                 posB++
             }
 
-            if (posA + posB - 1 == medianPos.first) {
+            val posBoth = posA + posB - 1
+            if (posBoth == medianPos.first) {
                 if (medianPos.first == medianPos.second)
                     return take.toDouble() // A shortcut
                 else
                     medVal.first = take
             }
-            else if (posA + posB - 1 == medianPos.second) {
+            else if (posBoth == medianPos.second) {
                 medVal.second = take
                 xprintln("MedVal at the end: $medVal")
                 break
@@ -60,14 +64,15 @@ class Leet4 {
         return median
     }
 
-
 }
 
 fun main() {
     for (i in listOf(
         //20 to Pair(intArrayOf(10,20,30), intArrayOf(20,30,40)),
         //2 to Pair(intArrayOf(1,3), intArrayOf(2)),
-        2.5 to Pair(intArrayOf(1,2), intArrayOf(3,4)),
+        //2.5 to Pair(intArrayOf(1,2), intArrayOf(3,4)),
+        //1.0 to Pair(intArrayOf(), intArrayOf(1)),
+        2.0 to Pair(intArrayOf(2), intArrayOf()),
         //null to generateInts(50), generateInts(60)
     )) {
         val med = Leet4().findMedianSortedArrays(i.second.first, i.second.second)
