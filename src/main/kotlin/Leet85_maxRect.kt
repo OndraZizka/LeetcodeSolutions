@@ -5,21 +5,21 @@ import kotlin.collections.ArrayList
 class Leet85_maxRect {
 
     fun maximalRectangle(matrix: Array<CharArray>): Int {
-
         val matFolded = ArrayList<List<Int>>(matrix.size)
-
-
         for (row in matrix) {
-            val rowFolded = row.map { it - '0' }.runningFold(0) { a, b -> if (b == 0) 0 else (a + b) }
+            //val rowFolded = row.map { it - '0' }.runningFold(0) { a, b -> if (b == 0) 0 else (a + b) }
+            var runVal = 0
+            val rowFolded = row.map { it - '0' }.map { if (it == 1) runVal++; else runVal = 0; runVal }
             println(rowFolded)
             matFolded.add(rowFolded)
         }
-
+        println()
         val transposed: List<List<Int>> = matFolded.first().mapIndexed { i, _ ->
              matFolded.map { it[i] }.also { println(it) }
         }
-
-        val maxRectArea = transposed.maxOf { maxRectInHistogram(it) }
+        val maxRectArea = transposed
+            .mapIndexed{ i, it -> maxRectInHistogram(it).also { println("Row $i: $it") } }
+            .sortedDescending().first() //transposed.maxOf { maxRectInHistogram(it) }
 
         return maxRectArea
     }
@@ -45,7 +45,7 @@ class Leet85_maxRect {
                     val formerHeight = stack.peek()
                     if (formerHeight < curHeight) {
                         val area = formerHeight * width
-                        maxArea = max(maxArea, area)
+                        maxArea = Math.max(maxArea, area)
                         stack.pop()
                         lastAtStack = if (stack.empty()) 0 else stack.peek()
                     }
@@ -57,7 +57,7 @@ class Leet85_maxRect {
         while (!stack.empty()) {
             val startAt = stack.pop()
             val area = (maxIndex - startAt + 1) * histogram[startAt]
-            maxArea = max(maxArea, area)
+            maxArea = Math.max(maxArea, area)
         }
         return maxArea
     }
@@ -66,9 +66,10 @@ class Leet85_maxRect {
 fun main() {
     val res = Leet85_maxRect().maximalRectangle(
         arrayOf(
-            "1101".toCharArray(),
-            "1111".toCharArray(),
-            "0111".toCharArray(),
+            "10100".toCharArray(),
+            "10111".toCharArray(),
+            "11111".toCharArray(),
+            "10010".toCharArray(),
         )
     )
     println("Res: $res")
