@@ -25,8 +25,7 @@ class Leet85_maxRect {
 
     data class AreaStartAndHeight(val startIndex: Int, val height: Int)
 
-    private fun maxRectInHistogram(histogram: List<Int>): Int {
-
+    fun maxRectInHistogram(histogram: List<Int>): Int {
         val stack = Stack<AreaStartAndHeight>()
         fun lastHeightAtStack() = if (stack.empty()) 0 else stack.peek().height
         var maxArea = 0
@@ -42,9 +41,9 @@ class Leet85_maxRect {
                 var width = 0
                 while (!stack.empty() ) {
                     val areaX = stack.peek()
-                    width = i - areaX.startIndex
-                    val areaHeight = histogram[areaX.startIndex]
                     if (areaX.height > curHeight) {
+                        width = i - areaX.startIndex
+                        val areaHeight = histogram[areaX.startIndex]
                         maxArea = Math.max(maxArea, areaX.height * width)
                         stack.pop()
                     }
@@ -57,7 +56,7 @@ class Leet85_maxRect {
         while (!stack.empty()) {
             val pop = stack.pop()
             val startAt = pop.startIndex
-            val area = (maxIndex - startAt +1) * pop.height
+            val area = (maxIndex +1 - startAt) * pop.height
             maxArea = Math.max(maxArea, area)
         }
         return maxArea
@@ -73,6 +72,8 @@ fun main() {
     )
     //matrix = arrayOf("1".toCharArray())
 
-    val res = Leet85_maxRect().maximalRectangle(matrix)
+    //val res = Leet85_maxRect().maximalRectangle(matrix)
+
+    val res = Leet85_maxRect().maxRectInHistogram(listOf(1,3,7,4))
     println("Res: $res")
 }
