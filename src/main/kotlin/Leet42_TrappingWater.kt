@@ -17,7 +17,7 @@ class Leet42_TrappingWater {
         }
 
         curMax = 0
-        for (i in (height.size - 1)..0) { ->
+        for (i in (height.size - 1)downTo 0) {
             val h  = height[i]
             if (h > curMax) {
                 curMax = h
@@ -35,6 +35,8 @@ class Leet42_TrappingWater {
 
         return sumWater
     }
+}
 
-
+fun main() {
+    Leet42_TrappingWater().trap(intArrayOf(0,1,0,2,1,0,1,3,2,1,2,1))
 }
