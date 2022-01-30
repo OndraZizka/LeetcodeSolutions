@@ -1,3 +1,5 @@
+import kotlin.math.min
+
 class Leet42_TrappingWater {
 
     fun trap(height: IntArray): Int {
@@ -5,11 +7,12 @@ class Leet42_TrappingWater {
         val maxesOnLeft = mutableListOf<Pair<Int, Int>>()  // Height, position
         val maxesOnRight = mutableListOf<Pair<Int, Int>>()  // Height, position
 
+        // Left maxes
         var curMax = 0
         height.forEachIndexed { i, h ->
             if (h > curMax) {
                 curMax = h
-                maxesOnRight.add(Pair(h, i))
+                maxesOnLeft.add(Pair(h, i))
             }
         }
 
@@ -18,15 +21,19 @@ class Leet42_TrappingWater {
             val h  = height[i]
             if (h > curMax) {
                 curMax = h
-                maxesOnLeft.add(Pair(h, i))
+                maxesOnRight.add(Pair(h, i))
             }
         }
 
+        var sumWater = 0
         height.forEachIndexed { i, h ->
-            val maxL = maxesOnLeft.asSequence().filter { it.second >  }
+            val maxL = maxesOnLeft.asSequence().filter { it.second < i }.lastOrNull()?.first ?: 0
+            val maxR = maxesOnRight.asSequence().filter { it.second > i }.lastOrNull()?.first ?: 0
+            val waterHere = Math.min(maxL, maxR) - h
+            sumWater += Math.max(0, waterHere)
         }
 
-        return TODO()
+        return sumWater
     }
 
 
