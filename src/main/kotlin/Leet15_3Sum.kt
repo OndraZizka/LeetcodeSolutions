@@ -1,51 +1,70 @@
 class Leet15_3Sum {
 
-
-    data class Triplet(val items: List<Int>)
-
     fun threeSum(nums: IntArray): List<List<Int>> {
-        val resSet = mutableSetOf<Triplet>()
-        val freq = nums.asList().groupingBy { it }.eachCount()
+        if (nums.size < 3) return emptyList()
+        nums.sort()
+        println("Sorted: ${nums.joinToString()}")
 
-        fun findCouplesThatSumToTarget(target: Int): List<IntArray> {
+        val res = mutableListOf<List<Int>>()
 
-            println("Targetting $target...")
-            val res = mutableListOf<IntArray>()
+        var posL = 0
+        var posR = nums.size - 1
+        var lastShiftedWasRight = true
 
-            @Suppress("NAME_SHADOWING")
-            val freq = HashMap<Int, Int>(freq)
-            freq.compute(-target) { key, count -> count?.minus(1) ?: 0 }
+        var prevL = Integer.MIN_VALUE
+        var prevR = Integer.MAX_VALUE
+        while (posL != posR) {
+            val numL = nums[posL]
+            val numR = nums[posR]
+            println("L: [$posL] = $numL | R: [$posR] = $numR ")
 
-            for (entry in freq) {
-                val b = entry.key
-                val complement = target - b
-                var complCount = freq.get(complement) ?: 0
-                if (b == complement) complCount--
+            do {
+                // Check if we have enough same numbers if they are needed.
+                val complement = -(numL + numR)
+                if (complement <= numL && nums[posL+1] != complement)
+                    continue
+                if (complement >= numR && nums[posR-1] != complement)
+                    continue
 
-                println("   Considering: [${b.toString().padStart(2)} (${entry.value}x), ${complement} (${complCount}x)]  ($target - $b)")
-                if (entry.value != 0 && complCount > 0)
-                    res.add(intArrayOf(b, complement))
+                // Skip the repeated.
+                if (numL == prevL) { posL++; continue }
+                if (numR == prevR) { posR--; continue }
+
+                // if (complement is not between posL and posR) continue
+                for (i in posL+1..posR-1) {
+                    if (nums[i] > complement) continue
+                    if (nums[i] == complement) {
+                        res.add(listOf(numL, complement, numR))
+                        break
+                    }
+                }
+
+            } while (false)
+
+            // Which one to shift
+            if (numL < 0 && lastShiftedWasRight && nums[posL+1] != 0) {
+                if (numR <= 0) break
+                posL++
+                lastShiftedWasRight = false
+                prevL = numL
+            } else if (numR > 0) {
+                if (numL >= 0) break
+                posR--
+                lastShiftedWasRight = true
+                prevR = numR
             }
-            println("    For $target --> added ${res.map { it.joinToString("+") }  }")
-            return res
+            else break
+
+
         }
-
-        for (a in nums) {
-            // Must find b + c = -a
-            val pairs: List<IntArray> = findCouplesThatSumToTarget(-a)
-
-            resSet.addAll(pairs.map { Triplet(listOf(a, it[0], it[1]).sorted()) })
-        }
-
-        val res2 = mutableListOf<List<Int>>()
-        res2.addAll(resSet.map { it.items } )
-
-        return resSet.asSequence().map { it -> it.items }.toList()
+        return res
     }
-
 }
 
 fun main() {
-    val res = Leet15_3Sum().threeSum(intArrayOf(-1,0,1,2,-1,-4))
+    var nums = intArrayOf(-1, 0, 1, 2, -1, -4)
+    nums = intArrayOf(-2,0,1,1,2)
+    nums = intArrayOf(3,0,-2,-1,1,2)
+    val res = Leet15_3Sum().threeSum(nums)
     println("$res")
 }
