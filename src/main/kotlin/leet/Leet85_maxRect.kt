@@ -1,3 +1,5 @@
+package leet
+
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -72,7 +74,7 @@ fun main() {
     )
     //matrix = arrayOf("1".toCharArray())
 
-    //val res = Leet85_maxRect().maximalRectangle(matrix)
+    //val res = leet.Leet85_maxRect().maximalRectangle(matrix)
 
     val res = Leet85_maxRect().maxRectInHistogram(listOf(1,3,7,4))
     println("Res: $res")

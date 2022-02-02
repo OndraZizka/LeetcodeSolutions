@@ -1,3 +1,5 @@
+package leet
+
 class Leet75_inplaceSort {
 
     fun sortColors(nums: IntArray): Unit {

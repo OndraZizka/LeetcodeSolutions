@@ -1,3 +1,5 @@
+package leet
+
 class Leet94_inOrderTree {
 
     val list = mutableListOf<Int>()

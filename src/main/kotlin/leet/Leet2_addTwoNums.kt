@@ -1,9 +1,11 @@
+package leet
+
 import kotlin.streams.toList
 
 //leetcode submit region begin(Prohibit modification and deletion)
 /**
  * Example:
- * var li = ListNode(5)
+ * var li = leet.ListNode(5)
  * var v = li.`val`
  */
 class Leet2_addTwoNums {

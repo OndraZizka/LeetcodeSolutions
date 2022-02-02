@@ -1,3 +1,5 @@
+package leet
+
 class Leet1 {
     fun twoSum(nums: IntArray, target: Int): IntArray {
         val counts = nums.asList().groupingBy { it }.eachCount()

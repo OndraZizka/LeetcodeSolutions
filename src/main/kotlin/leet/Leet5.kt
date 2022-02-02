@@ -1,4 +1,4 @@
-import java.util.*
+package leet
 
 class Leet5 {
 

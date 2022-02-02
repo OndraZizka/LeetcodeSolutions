@@ -1,8 +1,10 @@
+package leet
+
 import java.util.*
 import kotlin.collections.ArrayList
 
 /*
-Imagine a length-N array of booleans, initially all false.
+Imagine a length-leet.getN array of booleans, initially all false.
 Over time, some values are set to true, and at various points in time
 you would like to find the location of the nearest true to the right of given indices.
 
@@ -15,17 +17,17 @@ Note that these indices start at 1.
 When you receive a GET query, you must return the smallest index that contains a true value that is greater than or equal to the given index, or -1 if no such index exists.
 
 Signature
-int[] answerQueries(ArrayList<Query> queries, int N)
+int[] leet.answerQueries(ArrayList<leet.Query> queries, int leet.getN)
 
 Input
-A list of Q queries, formatted as [type, index] where type is either 1 or 2, and index is <= N
-1 <= N <= 1,000,000,000
+A list of Q queries, formatted as [type, index] where type is either 1 or 2, and index is <= leet.getN
+1 <= leet.getN <= 1,000,000,000
 1 <= Q <= 500,000
 
 Output
 Return an array containing the results of all GET queries. The result of queries[i] is the smallest index that contains a true value that is greater than or equal to i, or -1 if no index satisfies those conditions.
 Example
-N = 5
+leet.getN = 5
 Q = 5
 queries = [[2, 3], [1, 2], [2, 1], [2, 3], [2, 2]]
 output = [-1, 2, -1, 2]

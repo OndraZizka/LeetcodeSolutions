@@ -1,3 +1,5 @@
+package leet
+
 fun main() {
     for (i in listOf(
         "abcabcabcda" to 4,

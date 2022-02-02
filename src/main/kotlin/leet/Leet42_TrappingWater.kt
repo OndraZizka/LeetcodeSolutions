@@ -1,3 +1,5 @@
+package leet
+
 class Leet42_TrappingWater {
 
     fun trap(height: IntArray): Int {

@@ -1,3 +1,5 @@
+package leet
+
 import java.util.*
 
 class Leet71 {
@@ -31,7 +33,7 @@ class Leet71 {
                 }
                 else -> {
                     curToken.add(c)
-                    lastTokenType =  TokenType.NAME
+                    lastTokenType = TokenType.NAME
                 }
             }
         }

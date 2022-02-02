@@ -1,3 +1,5 @@
+package leet
+
 class Leet15_3Sum {
 
     fun threeSum(nums: IntArray): List<List<Int>> {

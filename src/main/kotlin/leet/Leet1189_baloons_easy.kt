@@ -1,3 +1,5 @@
+package leet
+
 public class Leet1189_baloons_easy
 {
     fun maxNumberOfBalloons(text: String): Int {

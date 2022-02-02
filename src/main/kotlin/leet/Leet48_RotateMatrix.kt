@@ -1,3 +1,5 @@
+package leet
+
 class Leet48_RotateMatrix {
 
     fun rotate(matrix: Array<IntArray>): Unit {

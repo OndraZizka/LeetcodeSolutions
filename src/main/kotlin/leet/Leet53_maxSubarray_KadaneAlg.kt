@@ -1,3 +1,5 @@
+package leet
+
 class Leet53_maxSubarray_KadaneAlg {
 
     fun maxSubArray(nums: IntArray): Int {

@@ -1,3 +1,5 @@
+package leet
+
 import kotlin.random.Random
 import kotlin.random.nextUInt
 
@@ -73,7 +75,7 @@ fun main() {
         //2.5 to Pair(intArrayOf(1,2), intArrayOf(3,4)),
         //1.0 to Pair(intArrayOf(), intArrayOf(1)),
         2.0 to Pair(intArrayOf(2), intArrayOf()),
-        //null to generateInts(50), generateInts(60)
+        //null to leet.generateInts(50), leet.generateInts(60)
     )) {
         val med = Leet4().findMedianSortedArrays(i.second.first, i.second.second)
         xprintln("Median: $med, expected: ${i.first}")

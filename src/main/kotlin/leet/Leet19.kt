@@ -1,3 +1,5 @@
+package leet
+
 import java.lang.StringBuilder
 
 class Leet19//Given the head of a linked list, remove the nᵗʰ node from the end of the list
