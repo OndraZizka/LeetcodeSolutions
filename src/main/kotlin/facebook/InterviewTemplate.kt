@@ -14,3 +14,5 @@ fun main() {
 }
 
 fun parseInts(str: String) = str.removePrefix("[").removeSuffix("]").splitToSequence(",").map { it.toInt() }.toList()
+
+val directions4 = "0 1, 1 0, -1 0, 0 -1"
