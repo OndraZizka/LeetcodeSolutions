@@ -1,6 +1,6 @@
-package facebook
+package foobar
 
-class Task01 {
+private class Task01 {
 
     fun solve(numbers: List<Int>) {
 

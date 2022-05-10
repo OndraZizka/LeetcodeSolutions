@@ -1,4 +1,4 @@
-package facebook
+package foobar
 
 fun main(args : Array<String>) {
 
@@ -10,7 +10,7 @@ fun main(args : Array<String>) {
 }
 
 /** 1460. Make Two Arrays Equal by Reversing Sub-arrays */
-class Leetcode1460 {
+private class Leetcode1460 {
 
     fun canBeEqual(target: IntArray, arr: IntArray): Boolean {
         val countsA = target.toTypedArray().groupingBy { it }.eachCount()
