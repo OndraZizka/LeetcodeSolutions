@@ -1,40 +1,36 @@
 package leet
 
 class Leetcode647_palindromes {
-
-
     fun countSubstrings(s: String): Int {
 
-        val pals = mutableSetOf<Pair<Int,Int>>()
+        var palCount = s.length
 
-        fun isPalindrome(l: Int, r: Int): Int {
-            val substring = s.substring(l, r)
-            if (substring == substring.reversed()) {
-                if (pals.add(l to r)) {
-                    println("PAL: $l to $r - $substring")
-                    return 1
-                }
+        for (middle in s.indices) {
+            println("*** $middle")
+            var delta = 1
+            while (middle-delta >= 0 && middle+delta < s.length ) {
+                if (s[middle-delta] != s[middle+delta]) break
+                println("  $delta > " + s.substring(middle-delta..middle+delta))
+                palCount++
+                delta++
             }
-            return 0
+            if (middle < 1) continue
+
+            delta = 1
+            while (middle-delta >= 0 && middle+delta-1 < s.length ) {
+                if (s[middle-delta] != s[middle+delta-1]) break
+                println("  _$delta > " + s.substring(middle-delta..middle+delta-1))
+                palCount++
+                delta++
+            }
         }
 
-        fun dfs(l: Int, r: Int): Int {
-            if (pals.contains(l to r)) return 0
-            //println("DOING $s, $l, $r ;  $r-$l > 1 ?   ${r-l > 1}")
-            var palCount = isPalindrome(l, r)
-            if (r-l > 1) {
-                palCount += dfs(l + 1, r) + dfs(l, r - 1)
-            }
-
-            return palCount
-        }
-
-        return dfs(0, s.length)
+        return palCount
     }
 }
 
 fun main() {
     //println (Leetcode647_palindromes().countSubstrings("abc"))
-    //println (Leetcode647_palindromes().countSubstrings("aaa"))
-    println (Leetcode647_palindromes().countSubstrings("xkjkqlajprjwefilxgpdpebieswu"))
+    println (Leetcode647_palindromes().countSubstrings("aaa"))
+    //println (Leetcode647_palindromes().countSubstrings("xkjkqlajprjwefilxgpdpebieswu"))
 }
