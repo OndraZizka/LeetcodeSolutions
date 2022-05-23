@@ -1,6 +1,24 @@
 package leet
 
+import leet.Leet98_validBinTree.TreeNode
+
 class Leet98_validBinTree {
+
+    class TreeNode(var `val`: Int) {
+        var left: TreeNode? = null
+        var right: TreeNode? = null
+
+        constructor(v: Int, l: TreeNode?, r: TreeNode?) : this(v) {
+            left = l
+            right = r
+        }
+
+        override fun toString(): String {
+            return "(${this.`val`}) ${left?.`val`} / ${right?.`val`}"
+        }
+    }
+
+
 
     var items = mutableListOf<Int>()
 
@@ -45,18 +63,4 @@ fun main() {
     )
 
     println("Result: " + Leet98_validBinTree().isValidBST(tree))
-}
-
-class TreeNode(var `val`: Int) {
-     var left: TreeNode? = null
-     var right: TreeNode? = null
-
-    constructor(v: Int, l: TreeNode?, r: TreeNode?) : this(v) {
-        left = l
-        right = r
-    }
-
-    override fun toString(): String {
-        return "(${this.`val`}) ${left?.`val`} / ${right?.`val`}"
-    }
 }

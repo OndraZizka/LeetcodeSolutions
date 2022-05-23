@@ -1,5 +1,7 @@
 package leet
 
+import leet.Leet98_validBinTree.TreeNode
+
 class Leet94_inOrderTree {
 
     val list = mutableListOf<Int>()
