@@ -1,14 +1,15 @@
 package leet
 
-class Node(var `val`: Int) {
-    var next: Node? = null
-    var random: Node? = null
-    override fun toString(): String {
-        return "(${`val`}) --> $random "
-    }
-}
 
 class Leetcode138_linkedListPointers {
+
+    class Node(var `val`: Int) {
+        var next: Node? = null
+        var random: Node? = null
+        override fun toString(): String {
+            return "(${`val`}) --> $random "
+        }
+    }
 
     fun copyRandomList(node: Node?): Node? {
 
